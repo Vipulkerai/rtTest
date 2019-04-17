@@ -1,3 +1,32 @@
+## 1.5.1 (04/16/2019)
+
+* [fix] Moved `getClientName()` from `Google\Auth\FetchAuthTokenInterface`
+  to `Google\Auth\SignBlobInterface`, and removed `getClientName()` from
+  `InsecureCredentials` and `UserRefreshCredentials`. (#223)
+
+## 1.5.0 (04/15/2019)
+
+### Changes
+
+ * Add support for signing strings with a Credentials instance. (#221)
+ * [Docs] Describe the arrays returned by fetchAuthToken. (#216)
+ * [Testing] Fix failing tests (#217)
+ * Update GitHub issue templates (#214, #213)
+
+## 1.4.0 (09/17/2018)
+
+### Changes
+
+ * Add support for insecure credentials (#208)
+
+## 1.3.3 (08/27/2018)
+
+### Changes
+
+ * Add retry and increase timeout for GCE credentials (#195)
+ * [Docs] Fix spelling (#204)
+ * Update token url (#206)
+
 ## 1.3.2 (07/23/2018)
 
 ### Changes

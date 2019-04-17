@@ -19,8 +19,8 @@
  * Service definition for CloudKMS (v1).
  *
  * <p>
- * Manages encryption for your cloud services the same way you do on-premises.
- * You can generate, use, rotate, and destroy AES256 encryption keys.</p>
+ * Manages keys and performs cryptographic operations in a central cloud
+ * service, for direct use by other cloud resources and applications.</p>
  *
  * <p>
  * For more information about this service, see the API
@@ -34,11 +34,15 @@ class Google_Service_CloudKMS extends Google_Service
   /** View and manage your data across Google Cloud Platform services. */
   const CLOUD_PLATFORM =
       "https://www.googleapis.com/auth/cloud-platform";
+  /** View and manage your keys and secrets stored in Cloud Key Management Service. */
+  const CLOUDKMS =
+      "https://www.googleapis.com/auth/cloudkms";
 
   public $projects_locations;
   public $projects_locations_keyRings;
   public $projects_locations_keyRings_cryptoKeys;
   public $projects_locations_keyRings_cryptoKeys_cryptoKeyVersions;
+  public $projects_locations_keyRings_importJobs;
   
   /**
    * Constructs the internal representation of the CloudKMS service.
@@ -50,6 +54,7 @@ class Google_Service_CloudKMS extends Google_Service
     parent::__construct($client);
     $this->rootUrl = 'https://cloudkms.googleapis.com/';
     $this->servicePath = '';
+    $this->batchPath = 'batch';
     $this->version = 'v1';
     $this->serviceName = 'cloudkms';
 
@@ -78,10 +83,6 @@ class Google_Service_CloudKMS extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'filter' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
@@ -89,6 +90,10 @@ class Google_Service_CloudKMS extends Google_Service
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
+                ),
+                'filter' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -246,15 +251,15 @@ class Google_Service_CloudKMS extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
                 'pageSize' => array(
                   'location' => 'query',
                   'type' => 'integer',
                 ),
                 'versionView' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -414,6 +419,46 @@ class Google_Service_CloudKMS extends Google_Service
               'httpMethod' => 'POST',
               'parameters' => array(
                 'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->projects_locations_keyRings_importJobs = new Google_Service_CloudKMS_Resource_ProjectsLocationsKeyRingsImportJobs(
+        $this,
+        $this->serviceName,
+        'importJobs',
+        array(
+          'methods' => array(
+            'getIamPolicy' => array(
+              'path' => 'v1/{+resource}:getIamPolicy',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'setIamPolicy' => array(
+              'path' => 'v1/{+resource}:setIamPolicy',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'testIamPermissions' => array(
+              'path' => 'v1/{+resource}:testIamPermissions',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'resource' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
